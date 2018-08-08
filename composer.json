@@ -26,5 +26,17 @@
         "psr-4": {
             "Jasny\\FQCN\\": "src/"
         }
+    },
+    "scripts": {
+        "test": [
+            "phpunit",
+            "phpcs -p",
+            "phpstan analyse"
+        ]
+    },
+    "scripts-descriptions": {
+        "test": "Run all tests and quality checks"
     }
+
 }
+
