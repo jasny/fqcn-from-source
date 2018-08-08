@@ -18,7 +18,9 @@
         "php": ">=7.1.0"
     },
     "require-dev": {
-        "jasny/php-code-quality": "^2.0"
+        "jasny/php-code-quality": "^2.0",
+        "phpstan/phpstan": "^0.10.2",
+        "phpstan/phpstan-strict-rules": "^0.10.1"
     },
     "autoload": {
         "psr-4": {
