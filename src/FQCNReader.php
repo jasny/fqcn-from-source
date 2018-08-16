@@ -45,7 +45,7 @@ class FQCNReader
         $class = null;
         $namespace = '';
 
-        for ($i = 0; $i < count($tokens); $i++) {
+        for ($i = 0, $n = count($tokens); $i < $n; $i++) {
             if ($tokens[$i][0] === T_NAMESPACE) {
                 $namespace = $this->getNamespaceFromTokens($tokens, $i);
             }
@@ -70,7 +70,7 @@ class FQCNReader
     {
         $namespace = '';
 
-        for ($j = $pos + 1; $j < count($tokens); $j++) {
+        for ($j = $pos + 1, $m = count($tokens); $j < $m; $j++) {
             if ($tokens[$j][0] === T_STRING) {
                 $namespace .= $tokens[$j][1] . '\\';
             } elseif ($tokens[$j] === '{' || $tokens[$j] === ';') {
@@ -92,7 +92,7 @@ class FQCNReader
     {
         $class = '';
 
-        for ($j = $pos + 1; $j < count($tokens); $j++) {
+        for ($j = $pos + 1, $m = count($tokens); $j < $m; $j++) {
             if ($tokens[$j] === '{') {
                 $class = $tokens[$pos + 2][1];
                 break;

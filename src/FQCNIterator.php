@@ -57,12 +57,15 @@ class FQCNIterator implements OuterIterator
             $file = $this->iterator->current();
             $class = isset($file) ? $this->reader->getClass($file) : null;
 
-            if ($class === null) {
-                $this->iterator->next();
+            if ($class !== null) {
+                break;
             }
-        } while ($class === null && $this->iterator->valid());
 
-        $this->currentFile = $file;
+            $this->iterator->next();
+            $valid = $this->iterator->valid();
+        } while ($valid);
+
+        $this->currentFile = isset($class) ? $file : null;
         $this->current = $class;
     }
 
@@ -91,10 +94,9 @@ class FQCNIterator implements OuterIterator
     }
 
     /**
-     * Return the key of the current element
-     * @link http://php.net/manual/en/iterator.key.php
+     * Return the key of the current element.
+     *
      * @return mixed scalar on success, or null on failure.
-     * @since 5.0.0
      */
     public function key()
     {
