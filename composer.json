@@ -27,16 +27,30 @@
             "Jasny\\FQCN\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Jasny\\FQCN\\Tests\\": "src/"
+        }
+    },
     "scripts": {
         "test": [
             "phpunit",
-            "phpcs -p",
+            "phpcs -p src",
             "phpstan analyse"
+        ],
+        "post-create-project-cmd": [
+            "bash init.sh && rm init.sh"
         ]
     },
     "scripts-descriptions": {
         "test": "Run all tests and quality checks"
-    }
-
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
 
