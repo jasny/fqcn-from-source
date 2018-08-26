@@ -62,7 +62,7 @@ use Jasny\FQCN\FQCNIterator;
 
 $directoryIterator = new RecursiveDirectoryIterator('path/to/project/');
 $recursiveIterator = new RecursiveIteratorIterator($directoryIterator);
-$sourceIterator = new RegexIterator($recursiveIterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+$sourceIterator = new RegexIterator($recursiveIterator, '/^.+\.php$/i', RegexIterator::GET_MATCH);
 
 $fqcnIterator = new FQCNIterator($sourceIterator);
 
