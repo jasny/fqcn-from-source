@@ -1,0 +1,6 @@
+exclude:
+- /blob/master/tests/FQCNReaderTest.php
+component_depth: 5
+languages:
+- php
+
