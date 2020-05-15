@@ -1,6 +1,6 @@
 {
     "name": "jasny/fqcn-reader",
-    "description": "",
+    "description": "Library to extract PHP class name from source file",
     "keywords": [],
     "license": "MIT",
     "authors": [
