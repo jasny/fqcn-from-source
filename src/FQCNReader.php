@@ -22,10 +22,11 @@ class FQCNReader
 
         while (!isset($class) && !feof($fp)) {
             $buffer .= fread($fp, 512);
-
-            if (strpos($buffer, '{') === false) {
+            $openingBracePosition = strpos($buffer, '{');
+            if ($openingBracePosition === false) {
                 continue;
             }
+            $buffer = substr($buffer, 0, $openingBracePosition + 1) . '}';
 
             $tokens = token_get_all($buffer);
             $class = $this->getFqcnFromTokens($tokens);

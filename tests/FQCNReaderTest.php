@@ -69,6 +69,64 @@ PHP;
         $this->assertEquals('Foo\\Bar', $this->fqcnReader->getClass('vfs://root/test.php'));
     }
 
+    /**
+     * Test case reproduces a bug that may happen due to buffering issues
+     */
+    public function testGetClassNsWarningInIssueNumber3()
+    {
+        $source = <<<PHP
+<?php
+/*
+ * ggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+ * ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+ * gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+ * gggggggggggggggggggggggggggg
+ * ggggggggggggggggggg
+ */
+
+namespace Slenderman\Core\Services;
+
+use Monolog\Formatter\HtmlFormatter;
+use Monolog\Formatter\LineFormatter;
+use Slenderman\Services\Contracts\ServiceProviderInterface;
+use const APP_ROOT;
+use function DI\add;
+use function DI\get;
+
+/**
+ * Contains settings that are for the whole app that do not change based on the mode
+ *
+ * @author Aesonus <corylcomposinger at gmail.com>
+ */
+class AppSettingsService implements ServiceProviderInterface
+{
+    /**
+     * Log handling settings
+     */
+    const LOG_HANDLER_SETTINGS = 'log_handler_settings';
+
+    /**
+     * Log handler settings for errors in html format
+     */
+    const LOG_HANDLER_SETTINGS_HTML = 'html_errors';
+
+    /**
+     * Log handler settings for errors in text line format
+     */
+    const LOG_HANDLER_SETTINGS_TEXT = 'text_errors';
+
+    /**
+     * The stream definition for a log handler
+     */
+    const LOG_HANDLER_STREAM = 'stream';
+}
+?>
+PHP;
+        $this->root->addChild(vfsStream::newFile('test.php')->setContent($source));
+
+        $this->assertEquals('Slenderman\\Core\\Services\\AppSettingsService', $this->fqcnReader->getClass('vfs://root/test.php'));
+    }
+
     public function testGetClassLongComment()
     {
         $docblock = "\n" . str_repeat(" * I am another line of comment\n", 100);
