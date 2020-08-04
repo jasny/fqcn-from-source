@@ -72,7 +72,7 @@ PHP;
     /**
      * Test case reproduces a bug that may happen due to buffering issues
      */
-    public function testGetClassNsWarningIssue()
+    public function testGetClassNsWarningInIssueNumber3()
     {
         $source = <<<PHP
 <?php
